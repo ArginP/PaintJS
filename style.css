@@ -1,0 +1,88 @@
+@import "reset.css";
+body {
+  background-color: #f6f9fc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+  user-select: none;
+}
+
+.canvas {
+  width: 700px;
+  height: 700px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.controls {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.controls .controls-range {
+  margin-bottom: 30px;
+}
+.controls .controls-buttons {
+  margin-bottom: 30px;
+}
+.controls .controls-buttons button {
+  all: unset;
+  cursor: pointer;
+  padding: 5px 0;
+  width: 100px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+}
+.controls .controls-buttons button:active {
+  transform: scale(0.95);
+}
+.controls .controls-colors {
+  display: flex;
+}
+.controls .controls-colors .controls-colors {
+  width: 50px;
+  height: 50px;
+  margin: 0 2px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.controls .controls-colors .black {
+  background-color: #2c2c2c;
+}
+.controls .controls-colors .white {
+  background-color: white;
+}
+.controls .controls-colors .red {
+  background-color: #ff0000;
+}
+.controls .controls-colors .orange {
+  background-color: orange;
+}
+.controls .controls-colors .yellow {
+  background-color: yellow;
+}
+.controls .controls-colors .green {
+  background-color: green;
+}
+.controls .controls-colors .light-blue {
+  background-color: dodgerblue;
+}
+.controls .controls-colors .blue {
+  background-color: blue;
+}
+.controls .controls-colors .purple {
+  background-color: purple;
+}
+
+/*# sourceMappingURL=style.css.map */
