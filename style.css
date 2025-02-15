@@ -1,11 +1,13 @@
 @import "reset.css";
 body {
+  width: auto;
+  height: 100%;
   background-color: #f6f9fc;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0;
+  margin: 25px;
   user-select: none;
 }
 
@@ -18,13 +20,28 @@ body {
 }
 
 .controls {
-  margin-top: 80px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .controls .controls-range {
   margin-bottom: 30px;
+}
+.controls .controls-range label {
+  display: flex;
+  margin: 5px 0;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7);
+}
+.controls .controls-range input {
+  cursor: grab;
+}
+.controls .controls-range input:active {
+  cursor: grabbing;
 }
 .controls .controls-buttons {
   margin-bottom: 30px;
@@ -53,9 +70,13 @@ body {
 .controls .controls-colors .controls-colors {
   width: 50px;
   height: 50px;
-  margin: 0 2px;
+  margin: 10px 2px;
   border-radius: 50%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+  cursor: grab;
+}
+.controls .controls-colors .controls-colors:active {
+  cursor: grabbing;
 }
 .controls .controls-colors .black {
   background-color: #2c2c2c;

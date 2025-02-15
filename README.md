@@ -9,7 +9,6 @@ Practice project
 - Reset.css
 - JavaScript
 
-
 ## Реализованный функционал:
 
-- 
+- Рисование простых линий
