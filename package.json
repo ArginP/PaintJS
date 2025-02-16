@@ -1,10 +1,26 @@
 {
   "name": "paintjs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Practice project",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch --mode=development"
   },
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArginP/PaintJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArginP/PaintJS/issues"
+  },
+  "homepage": "https://github.com/ArginP/PaintJS#readme",
+  "devDependencies": {
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  }
 }
