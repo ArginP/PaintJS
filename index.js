@@ -4,13 +4,13 @@ const controls = document.querySelector('.controls');
 const range = document.querySelector('#range');
 const mode = document.querySelector('#mode-button');
 
+// Значения по-умолчанию
+
 const initialColor = '#2c2c2c'
 
 // Размер канваса на HTML странице задан CSS, который JS не видит, поэтому отдельно задаем
 canvas.width = 700;
 canvas.height = 700;
-
-
 
 ctx.lineWidth = 5.0; // начальная толщина линии
 ctx.lineCap = 'round';
@@ -20,6 +20,8 @@ ctx.fillStyle = initialColor; // начальный цвет заливки
 
 let painting = false; // начальное значение "не рисуем"
 let filling = false; // начальное значение "не заливаем"
+
+// Функции, обрабатывающие логику рисования
 
 const stopPainting = () => {
     painting = false;
@@ -44,9 +46,7 @@ const onMouseMove = (e) => {
     }
 }
 
-const onMouseDown = (e) => {
-    e.preventDefault();
-
+const onMouseDown = () => {
     if (!filling) {
         startPainting();
     } else if (filling) {
@@ -54,6 +54,7 @@ const onMouseDown = (e) => {
     }
 }
 
+// Изменение цвета линий
 const changeColor = (e) => {
     const computedStyle = window.getComputedStyle(e.target);
     // получаем высчитанный стиль из SCSS файла
@@ -63,10 +64,12 @@ const changeColor = (e) => {
     // присваиваем значение background-color к цвету заливки
 }
 
+// Настройка толщины линии
 const changeRange = (e) => {
     ctx.lineWidth = e.target.value;
 }
 
+// Переключение режимов рисования
 const changeMode = () => {
     filling = !filling; // Переключает режим Рисование/Заливка
     // Обрабатывает текст кнопки в соответствии с режимом
@@ -86,6 +89,23 @@ const fillWhite = () => {
 
 fillWhite(); // Вызываем единожды всегда, иначе при сохранении картинки фон будет прозрачным
 
+// Предотвращаем вызов контекстного меню при клике ПКМ по канвасу
+const contextMenu = (e) => {
+    e.preventDefault();
+}
+
+// Функция сохранения рисунка в файл
+const saveAs = () => {
+    const link = document.createElement('a');
+    // создает виртуальный HTML элемент ссылки
+    link.href = canvas.toDataURL('image/png');
+    // с помощью метода .toDataURL('image/png') преобразует данные из канваса в PNG файл
+    link.download = 'PaintJS export';
+    // задает название файла по-умолчанию
+    link.click();
+    // кликает по виртуальное ссылке
+}
+
 // Обработчики событий:
 
 if (canvas) { // если канвас существует (прогрузился)
@@ -97,8 +117,10 @@ if (canvas) { // если канвас существует (прогрузил�
     // при отпускании клика по канвасу
     canvas.addEventListener('mouseleave', stopPainting);
     // при покидании канваса остановить рисование
+    canvas.addEventListener('contextmenu', contextMenu);
 }
 
+// Обработчики событий кликов по элементам меню:
 controls.addEventListener('click', (e) => {
     if (e.target.classList.contains('color')) {
         changeColor(e);
@@ -106,9 +128,12 @@ controls.addEventListener('click', (e) => {
         changeMode();
     } else if (e.target.id === 'clear-button') {
         fillWhite();
+    } else if (e.target.id === 'save-button') {
+        saveAs();
     }
 });
 
+// Обработчик события изменения положения ползунка range
 if (range) {
     range.addEventListener('input', changeRange);
 }
