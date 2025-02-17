@@ -1,16 +1,25 @@
 const canvas = document.querySelector('#canvas'); // Вытягиваем канвас со страницы
 const ctx = canvas.getContext('2d'); // позволяет управлять пикселями HTML-канваса
-const colors = document.querySelectorAll('.color');
+const controls = document.querySelector('.controls');
+const range = document.querySelector('#range');
+const mode = document.querySelector('#mode-button');
 
-canvas.width = 700; // размер канваса на HTML странице задан CSS, который JS не видит, поэтому отдельно задаем
+const initialColor = '#2c2c2c'
+
+// Размер канваса на HTML странице задан CSS, который JS не видит, поэтому отдельно задаем
+canvas.width = 700;
 canvas.height = 700;
 
-ctx.lineWidth = 2.5; // начальная толщина линии
+
+
+ctx.lineWidth = 5.0; // начальная толщина линии
 ctx.lineCap = 'round';
 ctx.lineJoin = 'round';
-ctx.strokeStyle = '2c2c2c'; // начальный цвет рисования
+ctx.strokeStyle = initialColor; // начальный цвет рисования
+ctx.fillStyle = initialColor; // начальный цвет заливки
 
 let painting = false; // начальное значение "не рисуем"
+let filling = false; // начальное значение "не заливаем"
 
 const stopPainting = () => {
     painting = false;
@@ -38,7 +47,11 @@ const onMouseMove = (e) => {
 const onMouseDown = (e) => {
     e.preventDefault();
 
-    startPainting();
+    if (!filling) {
+        startPainting();
+    } else if (filling) {
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 }
 
 const changeColor = (e) => {
@@ -46,7 +59,34 @@ const changeColor = (e) => {
     // получаем высчитанный стиль из SCSS файла
     ctx.strokeStyle = computedStyle.backgroundColor;
     // присваиваем значение background-color к цвету линии
+    ctx.fillStyle = computedStyle.backgroundColor;
+    // присваиваем значение background-color к цвету заливки
 }
+
+const changeRange = (e) => {
+    ctx.lineWidth = e.target.value;
+}
+
+const changeMode = () => {
+    filling = !filling; // Переключает режим Рисование/Заливка
+    // Обрабатывает текст кнопки в соответствии с режимом
+    if (!filling) {
+        mode.textContent = "Заливка";
+    } else if (filling) {
+        mode.textContent = "Рисование";
+    }
+}
+
+// Заливка канваса белым цветом
+const fillWhite = () => {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = ctx.strokeStyle // возвращает выбранный цвет заливки
+}
+
+fillWhite(); // Вызываем единожды всегда, иначе при сохранении картинки фон будет прозрачным
+
+// Обработчики событий:
 
 if (canvas) { // если канвас существует (прогрузился)
     canvas.addEventListener('mousemove', onMouseMove);
@@ -59,7 +99,16 @@ if (canvas) { // если канвас существует (прогрузил�
     // при покидании канваса остановить рисование
 }
 
-colors.forEach(color => { // кнопки выбора цвета
-    color.addEventListener('click', changeColor);
-})
+controls.addEventListener('click', (e) => {
+    if (e.target.classList.contains('color')) {
+        changeColor(e);
+    } else if (e.target.id === 'mode-button') {
+        changeMode();
+    } else if (e.target.id === 'clear-button') {
+        fillWhite();
+    }
+});
 
+if (range) {
+    range.addEventListener('input', changeRange);
+}

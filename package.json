@@ -4,8 +4,6 @@
   "description": "Practice project",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack --mode=production",
-    "watch": "webpack --watch --mode=development"
   },
   "private": true,
   "repository": {
@@ -20,7 +18,5 @@
   },
   "homepage": "https://github.com/ArginP/PaintJS#readme",
   "devDependencies": {
-    "webpack": "^5.98.0",
-    "webpack-cli": "^6.0.1"
   }
 }
