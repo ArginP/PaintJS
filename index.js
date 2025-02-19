@@ -62,6 +62,7 @@ const changeColor = (e) => {
     // присваиваем значение background-color к цвету линии
     ctx.fillStyle = computedStyle.backgroundColor;
     // присваиваем значение background-color к цвету заливки
+    e.target.classList.add('active');
 }
 
 // Настройка толщины линии
@@ -123,6 +124,8 @@ if (canvas) { // если канвас существует (прогрузил�
 // Обработчики событий кликов по элементам меню:
 controls.addEventListener('click', (e) => {
     if (e.target.classList.contains('color')) {
+        const colors = document.querySelectorAll('.color');
+        colors.forEach(color => color.classList.remove('active'));
         changeColor(e);
     } else if (e.target.id === 'mode-button') {
         changeMode();
